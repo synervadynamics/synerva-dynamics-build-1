@@ -115,9 +115,11 @@ const labsItems = [
 
 const bySlug = (slug: string) => labsItems.find(item => item.slug === slug);
 
-type Params = { params: { slug: string } };
+interface PageProps {
+  params: { slug: string };
+}
 
-export function generateMetadata({ params }: Params) {
+export function generateMetadata({ params }: PageProps) {
   const item = bySlug(params.slug);
   if (!item) return {};
   return buildPageMetadata({
@@ -127,7 +129,7 @@ export function generateMetadata({ params }: Params) {
   });
 }
 
-export default function LabsDetailPage({ params }: Params) {
+export default function Page({ params }: PageProps) {
   const item = bySlug(params.slug);
   if (!item) return notFound();
   const detail = detailsBySlug[params.slug];
