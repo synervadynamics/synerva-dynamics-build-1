@@ -27,10 +27,12 @@ const detailsBySlug: Record<
     ],
     videoLabel: "Lucentra system console",
     ctaLabel: "Enter Lucentra Labs",
-    proof: "Built from the real constraints of real operators who needed clarity faster than chaos could form."
+    proof:
+      "Built from the real constraints of real operators who needed clarity faster than chaos could form."
   },
   verisense: {
-    eyebrow: "Behavioral Signal Intelligence for Leaders Who Need Truth, Not Noise",
+    eyebrow:
+      "Behavioral Signal Intelligence for Leaders Who Need Truth, Not Noise",
     title: "Verisense: Decode Presence, Power, and the Human Signal",
     lead:
       "Verisense turns communication into data without stripping it of humanity. It reads micro-behaviors, cadence, tension, and the emotional current beneath your words, revealing the invisible architecture of how people trust, resist, decide, and follow. Leadership stops being guesswork and becomes a discipline you can measure, train, and refine. Verisense shows you the difference between speaking and being heard.",
@@ -41,11 +43,13 @@ const detailsBySlug: Record<
     ],
     videoLabel: "Verisense signal capture stream",
     ctaLabel: "Explore Verisense Labs",
-    proof: "Modeled on evidence-based communication psychology used in executive coaching, crisis negotiation, and elite performance."
+    proof:
+      "Modeled on evidence-based communication psychology used in executive coaching, crisis negotiation, and elite performance."
   },
   "analytics-patterns": {
     eyebrow: "Diagnostics for Operators Who Treat Data Like a Living System",
-    title: "Analytics Patterns: Truth-Seeking Dashboards for Serious Decisions",
+    title:
+      "Analytics Patterns: Truth-Seeking Dashboards for Serious Decisions",
     lead:
       "Analytics Patterns transforms dashboards from decorative charts into diagnostic instruments. It traces cause and effect through your funnel, your workflows, and your operations, revealing not only what’s happening but why it’s happening. Vanity metrics vanish. Operational realism takes their place. You get a closed-loop feedback system that behaves more like a flight deck than a report—capable of exposing friction, validating direction, and giving you the confidence to scale without superstition.",
     bullets: [
@@ -55,11 +59,14 @@ const detailsBySlug: Record<
     ],
     videoLabel: "Operational realism overlays",
     ctaLabel: "View Analytics Patterns",
-    proof: "Informed by real operator data from teams who needed dashboards that could actually keep up."
+    proof:
+      "Informed by real operator data from teams who needed dashboards that could actually keep up."
   },
   "content-systems-workbook": {
-    eyebrow: "Editorial Architecture for Brands That Want Scale Without Losing Soul",
-    title: "Content Systems Workbook: The Framework That Makes Creativity Repeatable",
+    eyebrow:
+      "Editorial Architecture for Brands That Want Scale Without Losing Soul",
+    title:
+      "Content Systems Workbook: The Framework That Makes Creativity Repeatable",
     lead:
       "The Content Systems Workbook is editorial gravity in a bottle. It teaches your ideas to organize themselves so you can produce at scale without diluting the intelligence or authenticity behind your voice. Every matrix, scaffold, and narrative template inside it acts like a stabilizing field: it keeps your thinking sharp, your message consistent, and your creative identity unmistakably your own. This is how you build a publishing engine that grows with you, not against you.",
     bullets: [
@@ -69,11 +76,14 @@ const detailsBySlug: Record<
     ],
     videoLabel: "Editorial systems overview",
     ctaLabel: "Open the Workbook",
-    proof: "Used to build multi-platform content engines for operators who needed to scale output without sacrificing integrity."
+    proof:
+      "Used to build multi-platform content engines for operators who needed to scale output without sacrificing integrity."
   },
   "offer-engineering-sheets": {
-    eyebrow: "Behavioral Economics for Offers Built on Clarity, Not Manipulation",
-    title: "Offer Engineering Sheets: The Art and Psychology of High-Trust Conversion",
+    eyebrow:
+      "Behavioral Economics for Offers Built on Clarity, Not Manipulation",
+    title:
+      "Offer Engineering Sheets: The Art and Psychology of High-Trust Conversion",
     lead:
       "Offer Engineering Sheets distill the mechanics of human decision-making into a clean, ethical blueprint. They help you articulate value with undeniable clarity, shape pricing logic that respects how people understand risk, and remove friction without resorting to coercion. The result is a structure that guides prospects toward the choice already aligned with their self-interest. You don’t push. You illuminate. And people say yes because everything finally makes sense.",
     bullets: [
@@ -83,7 +93,8 @@ const detailsBySlug: Record<
     ],
     videoLabel: "Offer Engineering diagnostics",
     ctaLabel: "Access Offer Sheets",
-    proof: "Rooted in peer-reviewed behavioral economics and field-tested offer design used across high-trust services."
+    proof:
+      "Rooted in peer-reviewed behavioral economics and field-tested offer design used across high-trust services."
   },
   "rockstar-server-playbook": {
     eyebrow: "Where Chaos Becomes Craft",
@@ -102,13 +113,19 @@ const detailsBySlug: Record<
 };
 
 const labsItems = [
-  ...copy.labs.secondary.map(item => ({ ...item, slug: item.href.replace("/labs/", "") })),
+  ...copy.labs.secondary.map(item => ({
+    ...item,
+    slug: item.href.replace("/labs/", "")
+  })),
   {
     title: "The Rockstar Server Playbook",
     desc:
       "This is the book that sparked early murmurs around Synerva. A raw, cinematic, psychologically sharp account of what it means to operate with grace in a pressure cooker world.",
     href: "/labs/rockstar-server-playbook",
-    video: { src: "/visuals/deliver/hero-vid-1.mp4", label: "What Pressure Teaches" },
+    video: {
+      src: "/visuals/deliver/hero-vid-1.mp4",
+      label: "What Pressure Teaches"
+    },
     slug: "rockstar-server-playbook"
   }
 ];
@@ -132,6 +149,7 @@ export function generateMetadata({ params }: PageProps) {
 export default function Page({ params }: PageProps) {
   const item = bySlug(params.slug);
   if (!item) return notFound();
+
   const detail = detailsBySlug[params.slug];
   if (!detail) return notFound();
 
@@ -139,17 +157,29 @@ export default function Page({ params }: PageProps) {
     <main className="bg-[var(--bg)] text-white">
       <section className="relative isolate overflow-hidden px-6 pt-28 sm:px-10 lg:px-16">
         <div className="relative z-10 mb-4 flex justify-start">
-          <Link href="/" className="text-sm uppercase tracking-[0.3em] text-white/70 transition hover:text-white">
+          <Link
+            href="/"
+            className="text-sm uppercase tracking-[0.3em] text-white/70 transition hover:text-white"
+          >
             ← Home
           </Link>
         </div>
+
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-black/80 to-cyan-500/10" />
         <div className="absolute inset-0 bg-black/60" />
+
         <div className="relative mx-auto grid max-w-5xl gap-10 rounded-[3rem] border border-white/10 bg-black/50 p-10 backdrop-blur-3xl lg:grid-cols-[1.05fr_0.95fr]">
           <div className="space-y-6">
-            <p className="text-xs uppercase tracking-[0.4em] text-white/60">{detail.eyebrow}</p>
-            <h1 className="text-4xl leading-tight sm:text-5xl">{detail.title}</h1>
-            <p className="text-base text-white/75 whitespace-pre-line">{detail.lead}</p>
+            <p className="text-xs uppercase tracking-[0.4em] text-white/60">
+              {detail.eyebrow}
+            </p>
+            <h1 className="text-4xl leading-tight sm:text-5xl">
+              {detail.title}
+            </h1>
+            <p className="text-base text-white/75 whitespace-pre-line">
+              {detail.lead}
+            </p>
+
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/labs#preview-access"
@@ -165,15 +195,27 @@ export default function Page({ params }: PageProps) {
               </Link>
             </div>
           </div>
+
           <div className="space-y-4 rounded-[2.5rem] border border-white/10 bg-white/5 p-6">
             <div className="overflow-hidden rounded-2xl border border-white/10">
-              <video autoPlay loop muted playsInline className="aspect-[4/3] w-full object-cover" aria-label={item.video.label}>
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="aspect-[4/3] w-full object-cover"
+                aria-label={item.video.label}
+              >
                 <track kind="captions" label={item.video.label} />
                 <source src={item.video.src} type="video/mp4" />
               </video>
             </div>
-            <p className="text-xs uppercase tracking-[0.35em] text-white/60">{item.title}</p>
+
+            <p className="text-xs uppercase tracking-[0.35em] text-white/60">
+              {item.title}
+            </p>
             <p className="text-sm text-white/70">{detail.videoLabel}</p>
+
             <ul className="space-y-2 text-sm text-white/75">
               {detail.bullets.map(point => (
                 <li key={point} className="flex items-start gap-3">
@@ -182,7 +224,10 @@ export default function Page({ params }: PageProps) {
                 </li>
               ))}
             </ul>
-            <p className="text-xs uppercase tracking-[0.3em] text-white/50">{detail.proof}</p>
+
+            <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+              {detail.proof}
+            </p>
           </div>
         </div>
       </section>
