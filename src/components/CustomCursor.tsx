@@ -2,8 +2,19 @@
 
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 
-const variants = {
+type CursorVariant = {
+  scale: number;
+  opacity: number;
+  mixBlendMode: CSSProperties["mixBlendMode"];
+  borderColor: string;
+  backgroundColor: string;
+  halo: string;
+  core: string;
+};
+
+const variants: Record<"default" | "link" | "accent", CursorVariant> = {
   default: {
     scale: 1,
     opacity: 0.68,
@@ -16,6 +27,7 @@ const variants = {
   link: {
     scale: 1.4,
     opacity: 0.88,
+    mixBlendMode: "screen",
     borderColor: "rgba(255,255,255,0.75)",
     backgroundColor: "rgba(255,255,255,0.12)",
     halo: "rgba(132,196,255,0.16)",
@@ -24,6 +36,7 @@ const variants = {
   accent: {
     scale: 1.8,
     opacity: 0.92,
+    mixBlendMode: "screen",
     borderColor: "rgba(88,229,255,0.9)",
     backgroundColor: "rgba(88,229,255,0.18)",
     halo: "rgba(88,229,255,0.18)",
@@ -90,7 +103,7 @@ export const CustomCursor = () => {
       translateY: smoothY,
       borderColor: variants[variant].borderColor,
       backgroundColor: variants[variant].backgroundColor,
-      mixBlendMode: variants[variant].mixBlendMode as any
+      mixBlendMode: variants[variant].mixBlendMode
     }),
     [smoothX, smoothY, variant]
   );

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import FadeIn from "@/components/sections/FadeIn";
+import FadeIn from "../../components/sections/FadeIn";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
-import { copyCognivate } from "@/components/cognivate/content";
+import { copyCognivate } from "../../components/cognivate/content";
 
 export const metadata = {
   title: "Cognivate — Syndicate Dynamics",

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import FadeIn from "@/components/sections/FadeIn";
+import FadeIn from "../../components/sections/FadeIn";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
-import { copyContentSystems } from "@/components/content-systems/content";
+import { copyContentSystems } from "../../components/content-systems/content";
 
 export const metadata = {
   title: "Content Systems — Syndicate Dynamics",
@@ -34,7 +34,7 @@ export default function ContentSystemsPage() {
               {hero.ctaPrimary}
             </Link>
             <Link
-              href="/work"
+              href="/cases"
               className="rounded-xl border border-white/10 bg-white/[0.06] px-5 py-3 text-sm font-semibold transition hover:bg-white/[0.1]"
             >
               {hero.ctaSecondary}
@@ -187,7 +187,7 @@ export default function ContentSystemsPage() {
               {cta.primary}
             </Link>
             <Link
-              href="/work"
+              href="/cases"
               className="rounded-xl border border-white/10 bg-white/[0.08] px-5 py-3 text-sm font-semibold transition hover:bg-white/[0.14]"
             >
               {cta.secondary}

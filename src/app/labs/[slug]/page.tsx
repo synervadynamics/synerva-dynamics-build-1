@@ -132,25 +132,31 @@ const labsItems = [
 
 const bySlug = (slug: string) => labsItems.find(item => item.slug === slug);
 
-interface PageProps {
-  params: { slug: string };
-}
-
-export function generateMetadata({ params }: PageProps) {
-  const item = bySlug(params.slug);
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const item = bySlug(slug);
   if (!item) return {};
   return buildPageMetadata({
     title: `${item.title} — Labs | Synerva Dynamics`,
     description: item.desc.replace(/\n/g, " "),
-    path: `/labs/${params.slug}`
+    path: `/labs/${slug}`
   });
 }
 
-export default function Page({ params }: PageProps) {
-  const item = bySlug(params.slug);
+export default async function Page({
+  params
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const item = bySlug(slug);
   if (!item) return notFound();
 
-  const detail = detailsBySlug[params.slug];
+  const detail = detailsBySlug[slug];
   if (!detail) return notFound();
 
   return (

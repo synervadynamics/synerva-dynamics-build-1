@@ -26,22 +26,24 @@ export const AmbientVideo = ({ src, className = "", opacity = 0.65, blur = false
   const c2 = `hsla(${Math.round(((baseHue + 0.2) % 1) * 360)}, 80%, 55%, ${opacity * 0.5})`;
   const c3 = `hsla(${Math.round(((baseHue + 0.4) % 1) * 360)}, 75%, 65%, ${opacity * 0.4})`;
 
+  const gradientStyle: CSSProperties = {
+    "--ambient-c1": c1,
+    "--ambient-c2": c2,
+    "--ambient-c3": c3,
+    top: `-${bleed}%`,
+    left: `-${bleed}%`,
+    right: `-${bleed}%`,
+    bottom: `-${bleed}%`,
+    filter: blur ? "blur(12px)" : undefined,
+    transform: blur ? "scale(1.05)" : undefined,
+    ...style
+  } as CSSProperties;
+
   return (
     <div
       aria-hidden
       className={`ambient-gradient pointer-events-none absolute -z-10 ${className}`}
-      style={{
-        "--ambient-c1": c1,
-        "--ambient-c2": c2,
-        "--ambient-c3": c3,
-        top: `-${bleed}%`,
-        left: `-${bleed}%`,
-        right: `-${bleed}%`,
-        bottom: `-${bleed}%`,
-        filter: blur ? "blur(12px)" : undefined,
-        transform: blur ? "scale(1.05)" : undefined,
-        ...style
-      }}
+      style={gradientStyle}
     />
   );
 };

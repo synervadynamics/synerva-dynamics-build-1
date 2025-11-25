@@ -1,7 +1,7 @@
 import Link from "next/link";
-import FadeIn from "@/components/sections/FadeIn";
+import FadeIn from "../../components/sections/FadeIn";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
-import { copyOfferEngineeringSheets } from "@/components/offer-engineering-sheets/content";
+import { copyOfferEngineeringSheets } from "../../components/offer-engineering-sheets/content";
 
 export const metadata = {
   title: "Offer Engineering Sheets — Syndicate Dynamics",

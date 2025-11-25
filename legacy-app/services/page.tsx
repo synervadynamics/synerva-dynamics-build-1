@@ -1,4 +1,4 @@
-import FadeIn from "@/components/sections/FadeIn";
+import FadeIn from "../../components/sections/FadeIn";
 
 export const metadata = {
   title: "Services — Syndicate Dynamics",

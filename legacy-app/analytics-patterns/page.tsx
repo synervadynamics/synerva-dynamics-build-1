@@ -1,7 +1,7 @@
 import Link from "next/link";
-import FadeIn from "@/components/sections/FadeIn";
+import FadeIn from "../../components/sections/FadeIn";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
-import { copyAnalyticsPatterns } from "@/components/analytics-patterns/content";
+import { copyAnalyticsPatterns } from "../../components/analytics-patterns/content";
 
 export const metadata = {
   title: "Analytics Patterns — Syndicate Dynamics",

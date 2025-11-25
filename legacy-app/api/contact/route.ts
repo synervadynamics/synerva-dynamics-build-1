@@ -36,7 +36,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: "Syndicate Dynamics <no-reply@syndicatedynamics.dev>",
       to: ["hello@syndicatedynamics.dev"],
-      reply_to: email,
+      replyTo: email,
       subject: `New contact from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`
     });

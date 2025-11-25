@@ -1,7 +1,7 @@
 import Link from "next/link";
-import FadeIn from "@/components/sections/FadeIn";
+import FadeIn from "../../components/sections/FadeIn";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
-import { copyContentSystemsWorkbook } from "@/components/content-systems-workbook/content";
+import { copyContentSystemsWorkbook } from "../../components/content-systems-workbook/content";
 
 export const metadata = {
   title: "Content Systems Workbook — Syndicate Dynamics",

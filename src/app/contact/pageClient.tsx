@@ -95,8 +95,10 @@ function ContactForm() {
   const formCopy = copy.contactForm;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked } = event.target;
-    setFormState(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+    const target = event.target;
+    const { name, value } = target;
+    const isCheckbox = target instanceof HTMLInputElement && target.type === "checkbox";
+    setFormState(prev => ({ ...prev, [name]: isCheckbox ? target.checked : value }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {

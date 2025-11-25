@@ -21,7 +21,7 @@ export default function About() {
           <p className="text-mute">{copy.about.p2}</p>
           {copy.about.href && copy.about.cta ? (
             <Link
-              href={copy.about.href}
+              href={{ pathname: copy.about.href }}
               className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition hover:text-accent/80"
             >
               {copy.about.cta}

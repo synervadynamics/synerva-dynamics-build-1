@@ -38,7 +38,7 @@ export default function Deliver() {
                   <div>
                     <h3 className="text-lg font-semibold tracking-tight sm:text-xl">
                       {it.href ? (
-                        <Link href={it.href} className="no-underline">
+                        <Link href={{ pathname: it.href }} className="no-underline">
                           {it.title}
                         </Link>
                       ) : (
@@ -52,7 +52,7 @@ export default function Deliver() {
                 </p>
                 {it.href && it.cta ? (
                   <Link
-                    href={it.href}
+                    href={{ pathname: it.href }}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition hover:text-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                   >
                     {it.cta}

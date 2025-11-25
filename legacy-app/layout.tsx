@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import HomeButton from "@/components/site/HomeButton";
+import HomeButton from "../components/site/HomeButton";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {

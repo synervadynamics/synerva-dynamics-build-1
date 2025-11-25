@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       from: "Synerva Dynamics <notifications@synerva-dynamics.com>",
       to: email,
       bcc: "synerva-dynamics@gmail.com",
-      reply_to: "synerva-dynamics@gmail.com",
+      replyTo: "synerva-dynamics@gmail.com",
       subject: preview.subject,
       text: [
         "Thanks for requesting the preview. Download here:",

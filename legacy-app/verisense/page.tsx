@@ -1,7 +1,7 @@
 import Link from "next/link";
-import FadeIn from "@/components/sections/FadeIn";
+import FadeIn from "../../components/sections/FadeIn";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
-import { copyVerisense } from "@/components/verisense/content";
+import { copyVerisense } from "../../components/verisense/content";
 
 export const metadata = {
   title: "Verisense — Syndicate Dynamics",

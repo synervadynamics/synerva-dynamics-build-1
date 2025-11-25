@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     await resend.emails.send({
       from: "Synerva Dynamics <notifications@synerva-dynamics.com>",
       to: copy.global.contact.email,
-      reply_to: email,
+      replyTo: email,
       subject: `New Synerva inquiry from ${company}`,
       text
     });

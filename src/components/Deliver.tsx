@@ -1,12 +1,23 @@
 "use client";
 
 import { motion, useMotionTemplate, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { copy } from "@/data/copy";
 import { CascadingText } from "@/components/CascadingText";
+
+type DeliverItem = {
+  title: string;
+  text: string;
+  detail: string;
+  panelText?: string;
+  panelDetail?: string;
+  panelPoints?: string[];
+  video: { src: string; label: string };
+};
 
 export const Deliver = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -19,19 +30,20 @@ export const Deliver = () => {
   const focusY = useTransform(scrollYProgress, [0, 1], ["20%", "70%"]);
   const gradient = useMotionTemplate`radial-gradient(circle at 25% ${focusY}, rgba(64,148,178,0.24), transparent 55%)`;
   const [activeIndex, setActiveIndex] = useState(0);
+  const deliverItems = copy.deliver.items as readonly DeliverItem[];
+  const activeItem: DeliverItem = deliverItems[activeIndex] ?? deliverItems[0];
   const cardsRef = useRef<HTMLDivElement>(null);
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 40 },
     visible: (index: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: index * 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+      transition: { delay: index * 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }
     })
   };
 
-  const activeProgress = useMemo(() => ((activeIndex + 1) / copy.deliver.items.length) * 100, [activeIndex]);
-  const activeItem = copy.deliver.items[activeIndex];
+  const activeProgress = useMemo(() => ((activeIndex + 1) / deliverItems.length) * 100, [activeIndex, deliverItems.length]);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
