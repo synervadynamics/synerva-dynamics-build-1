@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 64" fill="none">
+  <rect width="256" height="64" rx="8" fill="url(#g)"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="256" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00AAFF"/>
+      <stop offset="1" stop-color="#0066FF"/>
+    </linearGradient>
+  </defs>
+  <text x="50%" y="50%" fill="white" font-size="22" text-anchor="middle" alignment-baseline="middle" font-family="Inter, sans-serif">Syndicate Dynamics</text>
+</svg>

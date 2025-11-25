@@ -1,0 +1,17 @@
+{
+    "name": "Synerva Dynamics",
+    "short_name": "Synerva",
+    "description": "Synerva Dynamics builds unified brand, web, content, and automation systems that think in structure, not noise.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0b0e13",
+    "theme_color": "#00aaff",
+    "icons": [
+      {
+        "src": "/site-icon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

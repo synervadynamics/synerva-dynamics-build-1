@@ -1,0 +1,295 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: transparent;
+    --bg-elevated: #080d16;
+    --ink: #f4fbff;
+    --ink-soft: rgba(244, 251, 255, 0.75);
+    --mute: #7d8ca8;
+    --accent: #58e5ff;
+    --accent-strong: #00b6ff;
+    --g1: rgba(88, 229, 255, 0.24);
+    --g2: rgba(255, 170, 120, 0.2);
+    --g3: rgba(170, 255, 210, 0.18);
+    --g4: rgba(255, 214, 120, 0.14);
+    --cursor-x: 0.5;
+    --cursor-y: 0.5;
+    --cursor-speed: 0;
+    --grad-scroll: 0.5;
+    transition:
+      --g1 900ms ease,
+      --g2 900ms ease,
+      --g3 900ms ease,
+      --g4 900ms ease;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    height: 100%;
+    background: transparent;
+  }
+
+  body {
+    color: var(--ink);
+    font-family: "Space Grotesk Variable", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+    isolation: isolate;
+    background: transparent;
+  }
+
+  .page-shell {
+    position: relative;
+    z-index: 1;
+  }
+
+  ::selection {
+    background: rgba(0, 182, 255, 0.25);
+    color: var(--ink);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    text-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.35),
+      0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .reveal-line {
+    display: block;
+    overflow: hidden;
+    padding: 0.15em 0;
+  }
+
+  .cascade-outer {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cascade-track {
+    display: inline-flex;
+    gap: 2.5rem;
+    white-space: nowrap;
+    animation-duration: var(--speed, 60s);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 0.85rem;
+  }
+
+  .cascade-left {
+    animation-name: cascade-left;
+  }
+
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 15% 20%, rgba(88, 229, 255, 0.18), transparent 28%),
+      radial-gradient(circle at 80% 15%, rgba(255, 186, 73, 0.16), transparent 32%),
+      radial-gradient(circle at 50% 85%, rgba(122, 255, 190, 0.18), transparent 40%),
+      linear-gradient(135deg, rgba(5, 7, 10, 0.9), rgba(3, 6, 13, 0.92));
+    background-size: 200% 200%;
+    animation: hero-flow 16s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .global-gradient {
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at calc(var(--grad-x, 0.5) * 100%) calc(var(--grad-y, 0.5) * 100%), var(--g1, rgba(88, 229, 255, 0.22)), transparent 32%),
+      radial-gradient(circle at 18% calc((var(--grad-scroll, 0.5) * 60%)), var(--g2, rgba(255, 126, 189, 0.14)), transparent 38%),
+      radial-gradient(circle at 82% calc(30% + var(--grad-scroll, 0.5) * 42%), var(--g3, rgba(122, 255, 190, 0.16)), transparent 38%),
+      radial-gradient(circle at 45% 85%, var(--g4, rgba(255, 214, 102, 0.12)), transparent 45%),
+      radial-gradient(circle at 60% 25%, rgba(175, 144, 255, 0.12), transparent 40%),
+      radial-gradient(circle at 30% 78%, rgba(255, 132, 180, 0.1), transparent 42%),
+      linear-gradient(135deg, #02050b, #050910 40%, #04070f);
+    background-size: 240% 240%;
+    animation: global-flow 48s ease-in-out infinite alternate, global-drift 95s linear infinite;
+    mix-blend-mode: screen;
+    opacity: 0.92;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+
+  .ambient-gradient {
+    background: radial-gradient(circle at 25% 20%, var(--ambient-c1, var(--g1, rgba(88, 229, 255, 0.22))), transparent 32%),
+      radial-gradient(circle at 75% 30%, var(--ambient-c2, var(--g2, rgba(255, 186, 73, 0.18))), transparent 36%),
+      radial-gradient(circle at 45% 80%, var(--ambient-c3, var(--g3, rgba(122, 255, 190, 0.16))), transparent 40%),
+      linear-gradient(120deg, rgba(2, 5, 11, 0.9), rgba(6, 10, 15, 0.9));
+    background-size: 220% 220%;
+    animation: ambient-flow 26s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  .bubble-drift {
+    position: relative;
+    isolation: isolate;
+    z-index: 0;
+    background-size: 180% 180%;
+    animation: bubble-flow 38s ease-in-out infinite alternate;
+    overflow: hidden;
+  }
+
+  .bubble-drift::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 22% 18%, color-mix(in srgb, var(--g2), transparent) 0%, transparent 48%),
+      radial-gradient(circle at 78% 12%, color-mix(in srgb, var(--g5), transparent) 0%, transparent 46%),
+      radial-gradient(circle at 44% 86%, color-mix(in srgb, var(--g8), transparent) 0%, transparent 52%),
+      linear-gradient(140deg, color-mix(in srgb, var(--g1), rgba(0, 0, 0, 0.6)) 0%, color-mix(in srgb, var(--g6), rgba(0, 0, 0, 0.5)) 50%, color-mix(in srgb, var(--g4), rgba(0, 0, 0, 0.55)) 100%);
+    mix-blend-mode: screen;
+    opacity: 0.34;
+    filter: saturate(calc(1 + (var(--cursor-speed, 0) * 0.1))) blur(0.5px);
+    z-index: 0;
+  }
+
+  .bubble-drift > * {
+    position: relative;
+    z-index: 1;
+  }
+
+
+  @keyframes hero-flow {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 60% 40%;
+    }
+    100% {
+      background-position: 100% 80%;
+    }
+  }
+
+  @keyframes global-flow {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 60% 50%;
+    }
+    100% {
+      background-position: 100% 80%;
+    }
+  }
+
+  @keyframes global-drift {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(-2%, -1%, 0) scale(1.04);
+    }
+    100% {
+      transform: translate3d(3%, 2%, 0) scale(1.02);
+    }
+  }
+
+  .cascade-right {
+    animation-name: cascade-right;
+  }
+
+  .cascade-token {
+    color: rgba(244, 251, 255, 0.5);
+  }
+
+  @keyframes cascade-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes cascade-right {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+
+  .vertical-ribbon {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 0.35em;
+  }
+
+  .grain-sheen {
+    position: relative;
+  }
+
+  .grain-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 50%);
+    mix-blend-mode: screen;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .glass-panel {
+    background: rgba(3, 6, 13, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 30px 70px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(20px);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-strong);
+    outline-offset: 2px;
+  }
+
+  .noise-bg {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.56' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 20%, rgba(88, 229, 255, 0.15), transparent 45%);
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 0.8) 45%, transparent 90%);
+    pointer-events: none;
+  }
+
+  main section {
+    position: relative;
+  }
+}

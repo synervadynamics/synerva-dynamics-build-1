@@ -1,0 +1,13 @@
+import Hero from "../components/sections/Hero";
+import Labs from "../components/sections/Labs";
+import About from "../components/sections/About";
+
+export default function Page() {
+  return (
+    <main className="relative">
+      <Hero />
+      <Labs />
+      <About />
+    </main>
+  );
+}
