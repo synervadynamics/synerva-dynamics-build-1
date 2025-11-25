@@ -7,6 +7,7 @@ import { copy } from "@/data/copy";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CascadingText } from "@/components/CascadingText";
 import { SectionIndex } from "@/components/SectionIndex";
+import type { Easing } from "framer-motion";
 
 const sectionMap = [
   { id: "systems", label: "Systems" },
@@ -23,27 +24,28 @@ export const Hero = () => {
     target: sectionRef,
     offset: ["start start", "end start"]
   });
-  // Scroll progress powers the hero blur + sheen layers so motion ties directly to the reader's pace.
+
   const sheen = useTransform(scrollYProgress, [0, 1], ["30%", "80%"]);
   const focusY = useTransform(scrollYProgress, [0, 1], ["18%", "72%"]);
   const blurOpacity = useTransform(scrollYProgress, [0, 1], [0.22, 0.68]);
   const sheenBackground = useMotionTemplate`radial-gradient(circle at ${sheen} 20%, rgba(70,156,192,0.32), transparent 45%)`;
+
+  const easeCurve = [0.16, 1, 0.3, 1] as Easing;
 
   const container = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.1 }
+      transition: { duration: 0.9, ease: easeCurve, staggerChildren: 0.1 }
     }
   };
 
   const child = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 32 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: easeCurve } }
   };
 
-  // Intersection observer + scroll tracking both need the section node, so route them through a single ref setter.
   const setRefs = (node: HTMLElement | null) => {
     ref(node);
     sectionRef.current = node;
@@ -133,6 +135,7 @@ export const Hero = () => {
                 </Link>
               </motion.div>
             </div>
+
             <motion.div variants={child} className="space-y-4 rounded-[2.5rem] border border-white/10 bg-black/0 p-0">
               <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0d1c2e] via-[#0f2438] to-[#0a1624] p-4 shadow-[0_42px_140px_-70px_rgba(0,0,0,0.8)] backdrop-blur-2xl">
                 <div className="overflow-hidden rounded-2xl border border-white/8">
@@ -155,13 +158,14 @@ export const Hero = () => {
               <p className="text-sm text-white/78">{copy.hero.spotlight.description}</p>
             </motion.div>
           </div>
+
           <div className="grid gap-6 text-sm text-white/70 sm:grid-cols-2 md:grid-cols-3">
             {copy.hero.proofs.map(({ label, value }, index) => (
               <motion.div
                 key={label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : undefined}
-                transition={{ delay: 0.3 + index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 0.3 + index * 0.1, duration: 0.6, ease: easeCurve }}
                 className="rounded-2xl border border-white/12 bg-gradient-to-br from-[#0c1a2b] via-[#0f2234] to-[#0a1826] px-6 py-4 text-center shadow-[0_24px_80px_-50px_rgba(0,0,0,0.78)] transition hover:border-white/35 backdrop-blur-2xl"
               >
                 <p className="text-[0.6rem] uppercase tracking-[0.35em] text-white/60">{label}</p>

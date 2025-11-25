@@ -15,7 +15,7 @@ type DeliverItem = {
   detail: string;
   panelText?: string;
   panelDetail?: string;
-  panelPoints?: string[];
+  panelPoints: readonly string[];
   video: { src: string; label: string };
 };
 

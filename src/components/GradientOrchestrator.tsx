@@ -7,6 +7,11 @@ type Palette = {
   colors: [string, string, string, string];
 };
 
+type BestMatch = {
+  ratio: number;
+  colors: [string, string, string, string];
+};
+
 const palettes: Palette[] = [
   { id: "hero", colors: ["rgba(88,229,255,0.24)", "rgba(255,170,120,0.20)", "rgba(170,255,210,0.18)", "rgba(255,214,120,0.14)"] },
   { id: "narrative", colors: ["rgba(255,149,205,0.22)", "rgba(132,196,255,0.20)", "rgba(255,231,164,0.16)", "rgba(146,255,210,0.14)"] },
@@ -32,8 +37,10 @@ const setPalette = (colors?: [string, string, string, string]) => {
 export const GradientOrchestrator = () => {
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
+
     const handleEntry = (entries: IntersectionObserverEntry[]) => {
-      let best: { ratio: number; colors: [string, string, string, string] } | null = null;
+      let best: BestMatch | null = null;
+
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const palette = palettes.find(p => p.id === entry.target.id);
@@ -44,7 +51,8 @@ export const GradientOrchestrator = () => {
           }
         }
       });
-      if (best) setPalette(best.colors);
+
+      if (best) setPalette((best as BestMatch).colors);
     };
 
     palettes.forEach(p => {
@@ -58,7 +66,6 @@ export const GradientOrchestrator = () => {
       observers.push(observer);
     });
 
-    // Initialize with hero colors
     const heroPalette = palettes.find(p => p.id === "hero");
     setPalette(heroPalette?.colors);
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import type { Easing } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { copy } from "@/data/copy";
 
@@ -8,17 +9,24 @@ export const Philosophy = () => {
   const shouldReduceMotion = useReducedMotion();
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
+  // Fix: explicitly type the easing tuple so TS does not infer `number[]`
+  const easeCurve = [0.16, 1, 0.3, 1] as Easing;
+
   const variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 40 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.15 }
+      transition: { duration: 0.9, ease: easeCurve, staggerChildren: 0.15 }
     }
   };
 
   return (
-    <section id="philosophy" ref={ref} className="relative px-6 pb-20 pt-14 sm:px-10 sm:pb-22 sm:pt-16 lg:px-16 lg:pb-24 lg:pt-18">
+    <section
+      id="philosophy"
+      ref={ref}
+      className="relative px-6 pb-20 pt-14 sm:px-10 sm:pb-22 sm:pt-16 lg:px-16 lg:pb-24 lg:pt-18"
+    >
       <motion.div
         variants={variants}
         initial="hidden"

@@ -7,6 +7,13 @@ import { copy } from "@/data/copy";
 
 export type ProductEntry = (typeof copy.products)[keyof typeof copy.products];
 
+// Added: Explicit Demo type to stop "never" inference
+type Demo = {
+  label: string;
+  detail: string;
+  sample: string;
+};
+
 const otherProducts = (slug: string) =>
   Object.values(copy.products)
     .filter(entry => entry.slug !== slug)
@@ -16,7 +23,10 @@ export const ProductPage = ({ product }: { product: ProductEntry }) => {
   const shouldReduceMotion = useReducedMotion();
   const [demoIndex, setDemoIndex] = useState(0);
   const related = otherProducts(product.slug);
-  const demos = product.demos ?? [];
+
+  // Fixed: make readonly product.demos mutable for Demo[]
+  const demos: Demo[] = [...(product.demos ?? [])];
+
   // Keep the interactive demo state resilient even if copy data changes length.
   const activeDemo = demos[Math.min(demoIndex, Math.max(demos.length - 1, 0))];
 
@@ -90,7 +100,7 @@ export const ProductPage = ({ product }: { product: ProductEntry }) => {
       {demos.length > 0 && activeDemo && (
         <section className="relative overflow-hidden px-6 py-16 sm:px-10 lg:px-16">
           <div className="absolute inset-0 bg-gradient-to-br from-[#050912f0] via-[#0a1626d9] to-[#0a1320e6]" />
-        <div className="relative mx-auto grid max-w-6xl gap-8 rounded-[3rem] border border-white/12 bg-gradient-to-br from-[#0d1b2c] via-[#0f2336] to-[#0a1422] p-8 backdrop-blur-2xl shadow-[0_48px_160px_-88px_rgba(0,0,0,0.84)] lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative mx-auto grid max-w-6xl gap-8 rounded-[3rem] border border-white/12 bg-gradient-to-br from-[#0d1b2c] via-[#0f2336] to-[#0a1422] p-8 backdrop-blur-2xl shadow-[0_48px_160px_-88px_rgba(0,0,0,0.84)] lg:grid-cols-[0.9fr_1.1fr]">
             <div className="space-y-4">
               <p className="text-xs uppercase tracking-[0.4em] text-white/70">Interactive preview</p>
               <div className="flex flex-wrap gap-3">
@@ -120,7 +130,9 @@ export const ProductPage = ({ product }: { product: ProductEntry }) => {
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
                 Live feed
               </div>
-              <pre className="mt-4 text-base leading-relaxed text-white/80">{activeDemo.sample}</pre>
+              <pre className="mt-4 text-base leading-relaxed text-white/80">
+                {activeDemo.sample}
+              </pre>
             </div>
           </div>
         </section>
